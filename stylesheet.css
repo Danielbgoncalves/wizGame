@@ -1,0 +1,23 @@
+body{
+    /*background-color: #596646;*/
+    background-color: rgb(177, 110, 110);
+}
+
+#canvas{
+    width: 600px;
+    height: 300px;
+}
+
+#canvas {
+    display: flex;
+    align-items: center; /* Centraliza horizontalmente */
+    justify-content: center; /* Centraliza verticalmente */
+}
+
+
+#canvas {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
