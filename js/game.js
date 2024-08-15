@@ -25,7 +25,7 @@ export default class Game extends Phaser.Scene{
         this.load.image('raio', 'Assets/raio.png');
         this.load.image('coracao', 'Assets/coracao.png');
         this.load.image('tesouro', 'Assets/tesouro.png');
-        this.load.spritesheet('bad', 'Assets/Bad.png', {frameWidth: 38, frameHeight: 49} );
+        this.load.spritesheet('bad', 'Assets/bad.png', {frameWidth: 38, frameHeight: 49} );
         this.load.spritesheet('mago', 'Assets/mago.png', {frameWidth: 38, frameHeight: 49} );
 
         this.load.audio('soundtrack', 'Assets/soundtrack.m4a');
