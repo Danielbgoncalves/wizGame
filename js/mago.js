@@ -1,12 +1,12 @@
 export default class Mago {
-    constructor(positionX, positionY, cena, quem, vida){
+    constructor(positionX, positionY, cena, quem, vida, quantosPoderes){
         
         this.cena = cena;
         this.positionX = positionX;
         this.positionY = positionY;
         this.vida = vida;
         this.coracoes = [];
-        this.poderes = [];
+        this.qntPoderes = quantosPoderes;
 
         this.sprite = this.cena.physics.add.sprite(this.positionX, this.positionY, quem);
         this.sprite.setCollideWorldBounds(true)
@@ -26,6 +26,13 @@ export default class Mago {
             key: 'mago-ansioso',
             frames: this.cena.anims.generateFrameNumbers('mago', { start: 2, end: 3}),
             frameRate: 5,
+            repeat: 1
+        });
+
+        this.cena.anims.create({
+            key: 'mago-mtAnsioso',
+            frames: this.cena.anims.generateFrameNumbers('mago', { start: 2, end: 3}),
+            frameRate: 5,
             repeat: -1
         });
 
@@ -42,6 +49,8 @@ export default class Mago {
             frameRate: 12,
             repeat: 0
         });
+
+
 
         /*this.cena.anims.create({
             key: 'lancaPoder',
@@ -71,15 +80,16 @@ export default class Mago {
 
     perdeUmVida(){
         let coracao = this.coracoes.pop();
-        coracao.setVisible(false);
+        if(coracao) coracao.setVisible(false);
     }
 
     perdeUmPoder(){
-        if(this.poderes.length > 0){
-            let poder = this.poderes.pop();
-            poder.destroy();
-        }
-        
+        this.qntPoderes--;
+
+        this.sprite.play('mago-ansioso');
+        this.sprite.once('animationcomplete-mago-ansioso', () => {
+            this.sprite.play('mago-idle');
+        });
     }
 
     playAnims(animationKey){

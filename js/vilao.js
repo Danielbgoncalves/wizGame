@@ -1,5 +1,5 @@
 export default class Bad extends Phaser.Physics.Arcade.Sprite {
-    constructor(cena, positionX, positionY, imageNome, vida) {
+    constructor(cena, positionX, positionY, imageNome, vida, bonus) {
         super(cena,  positionX, positionY, imageNome);
 
         // Definição de propriedades
@@ -8,39 +8,37 @@ export default class Bad extends Phaser.Physics.Arcade.Sprite {
         this.positionY = positionY;
         this.imageNome = imageNome;
         this.vida = vida;
-        
+        this.bonus = bonus;  
         this.vel = 15 * this.vida;
-
-        //this.podeAndar = true;
-        
 
         // Adicionando o sprite à cena e ao sistema de física
         this.cena.add.existing(this);
         this.cena.physics.world.enable(this);
 
+        this.uniqueId = Phaser.Math.RND.uuid();
         this.animacoes();
-        this.play('anda')
+        ///this.play('anda')
     }
 
 
 
     animacoes() {
         this.cena.anims.create({
-            key: 'tomaDano',
+            key: this.uniqueId + '-tomaDano',
             frames: this.cena.anims.generateFrameNumbers( this.imageNome, { start: 2, end: 6 }),
             frameRate: 10,
             repeat: 0 // se repete 2 vezes
         });
 
         this.cena.anims.create({
-            key: 'anda',
+            key: this.uniqueId + '-anda',
             frames: this.cena.anims.generateFrameNumbers( this.imageNome, { start: 0, end: 1 }),
-            frameRate: 4,
+            frameRate: 7,
             repeat: -1 // se repete 2 vezes
         });
 
         this.cena.anims.create({
-            key: 'morre',
+            key: this.uniqueId + '-morre',
             frames: this.cena.anims.generateFrameNumbers( this.imageNome, { start: 7, end: 8 }),
             frameRate: 8,
             repeat: 0 
@@ -49,27 +47,34 @@ export default class Bad extends Phaser.Physics.Arcade.Sprite {
 
     levarDano(dano, instantaneo) {
         this.vida -= dano;
-        this.play('tomaDano');
+        this.playAnimis('tomaDano');
 
         if (this.vida <= 0) {
-            this.play('morre');
+            this.body.enable = false;
+            this.playAnimis('morre');
 
             if(instantaneo){
                 this.destroy();
             } else {
-                this.once('animationcomplete-morre', () => {
+                let key = 'animationcomplete-' + this.uniqueId + '-morre';
+                this.once(key, () => {
                     this.destroy();
                 });
             }
 
-            let novaOrda = this.cena.ordaManager.atualiza();
-            if(novaOrda){
-                this.cena.criaBads();
-                console.log('criou novos bads');
-            }
+            this.cena.ordaManager.atualiza();
+            console.log('MORREU UM');
+            this.cena.calculaPontuacao(this.bonus);
 
-            this.cena.vilaoTeste = null;
+            /*if(this.cena.ordaManager.nasceNovaOrda()){
+                this.cena.criaBads();
+                console.log('classe vilao mandou criar mais viloes');
+            }*/
         }
+    }
+
+    playAnimis(key){
+        this.play(this.uniqueId + '-' + key);
     }
 
     update(){   

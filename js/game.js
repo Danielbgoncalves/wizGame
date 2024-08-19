@@ -12,7 +12,12 @@ export default class Game extends Phaser.Scene{
             key: "CenaPrincipal"
         })
 
-        this.ordaManager = new Orda; 
+        this.ordaManager = new Orda(this); 
+        this.pontuacao = {
+            score: 0,
+            timeSinceLasKill: 0,
+            bonus: 0
+        };
     }
 
 
@@ -26,20 +31,20 @@ export default class Game extends Phaser.Scene{
         this.load.image('coracao', 'Assets/coracao.png');
         this.load.image('tesouro', 'Assets/tesouro.png');
         this.load.spritesheet('bad', 'Assets/bad.png', {frameWidth: 38, frameHeight: 49} );
-        this.load.spritesheet('mago', 'Assets/mago.png', {frameWidth: 38, frameHeight: 49} );
-
+        this.load.spritesheet('bad-blue', 'Assets/bad-blue.png', {frameWidth: 38, frameHeight: 49} );
         this.load.audio('soundtrack', 'Assets/soundtrack.m4a');
     }
 
     create(){
         let musica = this.sound.add('soundtrack');
-        musica.play();
+        //musica.play();
     
         this.numrDeTesouros = 0;
+        this.raiosArray = [];
 
         this.add.image(meioX, meioY , 'fundo');
 
-        this.mago = new Mago(meioX, meioY, this, 'mago', 3);
+        this.mago = new Mago(meioX, meioY, this, 'mago', 3, 0);
         this.mago.playAnims('mago-idle');
 
         this.mago.mira = this.add.image(this.mago.sprite.x, this.mago.sprite.y, 'mira');
@@ -50,31 +55,37 @@ export default class Game extends Phaser.Scene{
 
         this.criaGrupoRaios();
         this.criaGrupoBads();
+        this.criaGrupoBlueBads();
         this.surgeTesouro();
         
         this.physics.add.overlap(this.grupoRaios, this.grupoBads, this.colisaoDosRaios, null, this);
+        this.physics.add.overlap(this.grupoRaios, this.grupoBlueBads, this.colisaoDosRaios, null, this);
         this.physics.add.overlap(this.grupoBads, this.mago.sprite, this.colisaoDosBadseMago, null, this);
+        this.physics.add.overlap(this.grupoBlueBads, this.mago.sprite, this.colisaoDosBadseMago, null, this);
 
         this.criaBads(3);
         this.desenhaCoracoes();
-        this.desenhaPoderes(1);
-        
-        
+        this.desenhaPoderes();
+        this.atualizaVisibilidadePoderes();
+
+        this.scoreText = this.add.text(16, 395, 'Score: 0', { fontSize: '20px', fill: '#000' });
+           
     }
 
     pointerDown(){
         this.input.on('pointerdown', () => {
             
-            if(this.mago.poderes.length == 2 && this.numrDeTesouros == 0){
+            if(this.mago.qntPoderes == 2 && this.numrDeTesouros == 0){
                 this.surgeTesouro();
             } 
 
-            if(this.mago.poderes.length > 0){
+            if(this.mago.qntPoderes > 0){
                 let mago = this.mago.sprite;
                 let raio = this.grupoRaios.get(mago.x, mago.y, 'raio', this.mago.mira.angle);
 
                 raio.disparar();
                 this.mago.perdeUmPoder();
+                this.atualizaVisibilidadePoderes();
             }
                 
         });
@@ -105,29 +116,40 @@ export default class Game extends Phaser.Scene{
         });
     }
 
+    criaGrupoBlueBads(){
+        this.grupoBlueBads = this.physics.add.group({
+            classType: Bad,
+            runChildUpdate: true,
+            allowGravity: false
+        });
+    }
+
     criaBads(){
         let quantos = this.ordaManager.qntNesseNivel;
+        let cor = this.ordaManager.cor;
         
         while(quantos > 0){
             let randX = this.aleatorioX(-20, 870);
             let randY = this.aleatorioY(-20, 470);
+            
+            let badAleatorio;
+            if(cor === 'red'){
+                badAleatorio = this.grupoBads.get(randX, randY, 'bad', 3, 1);
+            } else if (cor === 'blue'){
+                badAleatorio = this.grupoBlueBads.get(randX, randY, 'bad-blue', 4, 10); // estão pegamdo a animação dos vermelhos ai ficam vermelhos tb 
+            }
 
-
-            let badAleatorio = this.grupoBads.get(randX, randY, 'bad', 3);
-            badAleatorio.play('anda');
             quantos--;
         }
         
     }
 
     colisaoDosRaios(projetil, alvo){
-        console.log('colisao dos raios e bads');
         projetil.destroy();
         alvo.levarDano(1, false); // ataque de um 
     }
 
     colisaoDosBadseMago(mago, bad){
-       //console.log('a')
         this.mago.levarDano(1); // Dano de 1
         bad.levarDano(5, true); // maior q a vida dos bads
     }
@@ -139,10 +161,20 @@ export default class Game extends Phaser.Scene{
         }
     }
 
-    desenhaPoderes(num){
-        for(let i = 0; i < num; i++){
+    desenhaPoderes(){
+        for(let i = 0; i < 20; i++){
             let raio = this.add.image(20 + i*20, 20, 'raio');
-            this.mago.poderes.push(raio);
+            this.raiosArray.push(raio);
+        }
+    }
+
+    atualizaVisibilidadePoderes(){
+        for(let i = 0; i < 20; i++){
+            if( i < this.mago.qntPoderes){
+                this.raiosArray[i].setVisible(true);
+            } else {
+                this.raiosArray[i].setVisible(false);
+            }
         }
     }
 
@@ -191,12 +223,10 @@ export default class Game extends Phaser.Scene{
 
         this.tesouro = this.physics.add.sprite(teasureX, teasureY, 'tesouro');
 
-        //this.physics.add.overlap(this.mago.sprite, this.tesouro, this.colisaoDoTesouro, null, this);
-
         this.tesouroCollider = this.physics.add.overlap(
             this.mago.sprite,
             this.tesouro,
-            this.colisaoDoTesouro,
+            this.colisaoDoTesouro, // mandam por padrão como parametros os dois corpos da colisao 
             null,
             this
         );
@@ -209,11 +239,15 @@ export default class Game extends Phaser.Scene{
             this
         );
 
-        console.log('gerou os colisores ');
-        console.log(this.tesouro);
     }
 
-    colisaoDoTesouro(){
+    colisaoDoTesouro(quemColidiu, corpoColidido){
+        if(quemColidiu === 'raio'){
+            this.addExtraScore(15);
+        } else {
+            this.addExtraScore(5);
+        }
+
         if(this.tesouro){
             this.tesouro.destroy();
             this.tesouro = null;
@@ -221,7 +255,29 @@ export default class Game extends Phaser.Scene{
         
 
         this.numrDeTesouros--;
-        this.desenhaPoderes(8);
+        this.mago.qntPoderes += 8;
+        this.atualizaVisibilidadePoderes();
+    }
+
+    updateScore(){
+        this.scoreText.setText('Score ' + this.pontuacao.score);
+    }
+
+    calculaPontuacao(){
+        let timeAtual = this.time.now;
+        let delayEntreAbates = timeAtual - this.pontuacao.timeSinceLasKill;
+        this.pontuacao.timeSinceLasKill = timeAtual;
+
+        this.pontuacao.score += 100;
+        this.pontuacao.score -= Math.floor(delayEntreAbates / 200);
+        this.pontuacao.score += this.pontuacao.bonus;
+
+        this.updateScore();
+    }
+
+    addExtraScore(pontos){
+        this.pontuacao.score += pontos;
+        this.updateScore(); 
     }
 
     update(){    

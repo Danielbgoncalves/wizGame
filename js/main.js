@@ -1,4 +1,5 @@
-import CenaPrincipal from './game.js'
+import Start from './start.js' ;
+import CenaPrincipal from './game.js';
 
 const config = {
     type: Phaser.AUTO,
@@ -15,6 +16,7 @@ const config = {
         }
     },
     scene: [
+        Start,
         CenaPrincipal
     ]
 }
