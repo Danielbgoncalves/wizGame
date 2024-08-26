@@ -1,23 +1,76 @@
-body{
-    /*background-color: #596646;*/
-    background-color: rgb(177, 110, 110);
+/* CSS do main e canvas */
+main {
+    display: flex;
+    flex-direction: column; /* Garante que os elementos dentro do main fiquem em coluna */
+    align-items: center; /* Centraliza os itens horizontalmente */
+    justify-content: flex-start; /* Alinha os itens ao topo */
+    height: 100vh; /* Faz o main ocupar a altura total da tela */
 }
 
-#canvas{
+#canvas {
     width: 600px;
     height: 300px;
-}
-
-#canvas {
     display: flex;
-    align-items: center; /* Centraliza horizontalmente */
-    justify-content: center; /* Centraliza verticalmente */
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px; /* Espaçamento entre o canvas e a tabela */
+    margin-top: 200px;
+    z-index: 1; /* Garante que o canvas fique acima */
 }
 
+/* CSS da tabela de ranking */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    color: #333;
+    margin: 0;
+}
 
-#canvas {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+.ranking-container {
+    width: 80%;
+    max-width: 800px;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 100px;
+    margin-bottom: 200px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    z-index: 0; /* Garante que o ranking-container fique abaixo do canvas */
+}
+
+h1 {
+    text-align: center;
+    color: #6a0dad;
+}
+
+.ranking-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.ranking-table th, .ranking-table td {
+    padding: 12px;
+    text-align: left;
+}
+
+.ranking-table th {
+    background-color: #6a0dad;
+    color: #ffffff;
+}
+
+.ranking-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.ranking-table tr:nth-child(odd) {
+    background-color: #f2f2f2;
+}
+
+.ranking-table tr:hover {
+    background-color: #ddd;
+}
+
+#space{
+    padding: 2%;
 }

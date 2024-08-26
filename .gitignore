@@ -1,0 +1,13 @@
+# Ignorar dependências do Node.js
+node_modules/
+
+# Ignorar logs do Node.js
+npm-debug.log
+yarn-error.log
+
+# Ignorar variáveis de ambiente. Não que tenha alguma aqui kk 
+.env
+
+# Ignorar logs
+logs/
+*.log

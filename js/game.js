@@ -36,8 +36,8 @@ export default class Game extends Phaser.Scene{
     }
 
     create(){
-        let musica = this.sound.add('soundtrack');
-        //musica.play();
+        this.musica = this.sound.add('soundtrack');
+        this.musica.play();
     
         this.numrDeTesouros = 0;
         this.raiosArray = [];
@@ -150,8 +150,13 @@ export default class Game extends Phaser.Scene{
     }
 
     colisaoDosBadseMago(mago, bad){
-        this.mago.levarDano(1); // Dano de 1
+        let morreu = this.mago.levarDano(1); // Dano de 1
         bad.levarDano(5, true); // maior q a vida dos bads
+        if(morreu){
+            this.musica.stop();
+            this.scene.start("DeadScene");
+        }
+            
     }
 
     desenhaCoracoes(){

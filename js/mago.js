@@ -72,10 +72,10 @@ export default class Mago {
 
         if(this.vida < 1){
             this.playAnims('mago-morre');
-            this.sprite.once('animationcomplete-morre', () => {
-                console.log('Você perdeu');
-            });
+            console.log("morreu caceteeee");
+            return true;
         }
+        return false;
     }
 
     perdeUmVida(){

@@ -8,7 +8,26 @@
 </head>
 <body>
     
-    <main id="canvas"></main>
+    <main>
+        <container id="canvas"></container>
+
+        <div class="ranking-container">
+            <h1>Ranking dos Jogadores</h1>
+            <table class="ranking-table">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Pontuação</th>
+                    </tr>
+                </thead>
+                <tbody id="ranking-body">
+                    <!-- Linhas da tabela serão inseridas aqui -->
+                </tbody>
+            </table>
+        </div>
+
+        <h6 id="space"> </h6>
+    </main>
     
     <script src="js/phaser.min.js"></script>
     <script type="module" src="js/main.js"></script>
