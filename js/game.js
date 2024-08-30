@@ -21,7 +21,6 @@ export default class Game extends Phaser.Scene{
     }
 
 
-
     preload(){
         //this.load.image('intro-porta', 'Assets/cenaIntro/intro-porta.png');
         this.load.image('fundo', 'Assets/fundo-maior.png');
@@ -45,7 +44,7 @@ export default class Game extends Phaser.Scene{
         this.add.image(meioX, meioY , 'fundo');
 
         this.mago = new Mago(meioX, meioY, this, 'mago', 3, 0);
-        this.mago.playAnims('mago-idle');
+        this.mago.playAnims('mago-mtAnsioso');
 
         this.mago.mira = this.add.image(this.mago.sprite.x, this.mago.sprite.y, 'mira');
         this.mago.mira.setOrigin(0, 0.5);

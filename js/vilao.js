@@ -17,7 +17,7 @@ export default class Bad extends Phaser.Physics.Arcade.Sprite {
 
         this.uniqueId = Phaser.Math.RND.uuid();
         this.animacoes();
-        ///this.play('anda')
+        this.playAnimis('anda');
     }
 
 

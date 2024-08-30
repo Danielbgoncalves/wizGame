@@ -36,7 +36,7 @@ export function receberRanking(){
     })
 }
 
-export function AddPlayerNoRanking(nome, score){
+function AddPlayerNoRanking(nome, score){
 
     const rankingBody = document.getElementById('ranking-body');
 
@@ -52,5 +52,9 @@ export function AddPlayerNoRanking(nome, score){
     row.appendChild(scoreCell);
 
     rankingBody.appendChild(row);
+}
 
+export async function servidor(nome, pontuacao){
+    await enviarPartida({nome, pontuacao});
+    receberRanking();
 }

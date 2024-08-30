@@ -17,6 +17,7 @@ export default class Dead extends Phaser.Scene{
         
         let musica = this.sound.add('deadSong');
         musica.play();
+        musica.volume = 0.3;
 
         this.add.image(425, 225,"fundo_morreu");
         
@@ -24,10 +25,8 @@ export default class Dead extends Phaser.Scene{
         let nome = cenaStart.nomeDoJogador;
         let cenaPrincipal = this.scene.get("CenaPrincipal");
         let pontuacao = cenaPrincipal.pontuacao.score;
-
-        /*let nome = 'Daniel';
-        let pontuacao = 345;*/
-
+        
+        
         this.add.text(90, 190, nome + ",", {
             fontSize: '40px',
             fill: '#ffffff',
@@ -38,10 +37,16 @@ export default class Dead extends Phaser.Scene{
         this.mago.sprite.setScale(1.5);
         this.mago.playAnims('mago-idle');
         
-        enviarPartida({nome, pontuacao});
-        receberRanking();
+        enviarPartida({nome, pontuacao})
+        this.time.delayedCall(400, () => {
+            receberRanking();
+        })  
+        
+        
         
     }
+
+    
 
     update(){}
 }
