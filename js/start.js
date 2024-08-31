@@ -21,6 +21,7 @@ export default class Start extends Phaser.Scene {
 
         // Texto que irá mostrar o nome digitado
         this.nomeDoJogador = '';
+        this.id = Phaser.Math.RND.uuid(); 
 
         // Criação do texto para mostrar o nome
         this.textoDeEntrada = this.add.text(450, 430, 'Digite seu nome: ', {

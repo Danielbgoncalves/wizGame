@@ -26,13 +26,24 @@ const corsOption = {
   const ranking = [];
   app.post('/api/ranking', (req, res) => {
     try{
-        let {nome, pontuacao} = req.body;
+        let {nome, pontuacao, id} = req.body;
+        let jogadorJaPresente = false;
 
         if(!nome || typeof pontuacao != 'number'){
             return res.status(400).json({message: 'nome ou pontuacao invalidos'});
         }
 
-        ranking.push({nome, pontuacao});
+        ranking.forEach((jogador) => {
+            if(jogador.id === id){
+              if(jogador.pontuacao < pontuacao) jogador.pontuacao = pontuacao;
+              jogadorJaPresente = true;
+            }
+        })
+
+        if(!jogadorJaPresente){
+          ranking.push({nome, pontuacao, id});
+        }
+        
         res.status(201).json({message: 'Dados enviados com sucesso'});
 
     } catch (error){

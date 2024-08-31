@@ -12,12 +12,7 @@ export default class Game extends Phaser.Scene{
             key: "CenaPrincipal"
         })
 
-        this.ordaManager = new Orda(this); 
-        this.pontuacao = {
-            score: 0,
-            timeSinceLasKill: 0,
-            bonus: 0
-        };
+        
     }
 
 
@@ -35,6 +30,13 @@ export default class Game extends Phaser.Scene{
     }
 
     create(){
+        this.ordaManager = new Orda(this); 
+        this.pontuacao = {
+            score: 0,
+            timeSinceLasKill: 0,
+            bonus: 0
+        };
+        
         this.musica = this.sound.add('soundtrack');
         this.musica.play();
     

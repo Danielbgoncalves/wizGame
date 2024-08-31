@@ -25,10 +25,12 @@ export function receberRanking(){
     })
     .then(data => {
         console.log(data);
+        clearLastRanking();
         data.forEach(entrada => {
             const nome = entrada.nome;
             const pontuacao = entrada.pontuacao;
-            AddPlayerNoRanking(nome, pontuacao);
+            const id = entrada.id;
+            AddPlayerNoRanking(nome, pontuacao, id);
         })
     })
     .catch(error =>{
@@ -36,8 +38,7 @@ export function receberRanking(){
     })
 }
 
-function AddPlayerNoRanking(nome, score){
-
+function AddPlayerNoRanking(nome, score, id){ // O id não esta sendo mostrado pq é feio só mostra pra debugar
     const rankingBody = document.getElementById('ranking-body');
 
     const row = document.createElement('tr'); document.createElement
@@ -48,8 +49,12 @@ function AddPlayerNoRanking(nome, score){
     const scoreCell = document.createElement('td');
     scoreCell.textContent = score;
 
+    /*const idCell = document.createElement('td');
+    idCell.textContent = id;*/
+
     row.appendChild(nameCell);
     row.appendChild(scoreCell);
+    //row.appendChild(idCell);
 
     rankingBody.appendChild(row);
 }
@@ -57,4 +62,12 @@ function AddPlayerNoRanking(nome, score){
 export async function servidor(nome, pontuacao){
     await enviarPartida({nome, pontuacao});
     receberRanking();
+}
+
+function clearLastRanking(){
+    const rankingBody = document.getElementById('ranking-body');
+
+    while(rankingBody.firstChild){
+        rankingBody.removeChild(rankingBody.firstChild);
+    }
 }
