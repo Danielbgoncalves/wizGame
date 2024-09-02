@@ -54,8 +54,7 @@ export default class Start extends Phaser.Scene {
         if (event.keyCode === Phaser.Input.Keyboard.KeyCodes.BACKSPACE && this.nomeDoJogador.length > 0) {
             this.nomeDoJogador = this.nomeDoJogador.slice(0, -1);
         } else if (event.keyCode === Phaser.Input.Keyboard.KeyCodes.ENTER) {
-            this.scene.start('CenaPrincipal');
-            console.log('Nome do jogador:', this.nomeDoJogador);
+            this.scene.start('CenaDicas');
         } else if (event.key.length === 1) {
             this.nomeDoJogador += event.key;
         }

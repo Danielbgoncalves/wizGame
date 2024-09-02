@@ -1,4 +1,5 @@
 import Start from './start.js' ;
+import Dicas from './dicas.js';
 import CenaPrincipal from './game.js';
 import DeadScene from './dead.js';
 
@@ -18,6 +19,7 @@ const config = {
     },
     scene: [
         Start,
+        Dicas,
         CenaPrincipal,
         DeadScene
     ]
