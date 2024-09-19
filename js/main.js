@@ -2,6 +2,7 @@ import Start from './start.js' ;
 import Dicas from './dicas.js';
 import CenaPrincipal from './game.js';
 import DeadScene from './dead.js';
+import CenaVitoria from './vitoria.js';
 
 const config = {
     type: Phaser.AUTO,
@@ -21,7 +22,8 @@ const config = {
         Start,
         Dicas,
         CenaPrincipal,
-        DeadScene
+        DeadScene,
+        CenaVitoria
     ]
 }
 

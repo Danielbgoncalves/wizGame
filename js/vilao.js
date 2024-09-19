@@ -93,6 +93,4 @@ export default class Bad extends Phaser.Physics.Arcade.Sprite {
         
     }
 
-
-
 }

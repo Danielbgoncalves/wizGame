@@ -46,13 +46,13 @@ export default class Dead extends Phaser.Scene{
             receberRanking();
         })  
         
-            this.input.on('pointerdown', (pointer) => {
-                if(pointer.x > 455 && pointer.x < 570
-                    && pointer.y > 368  && pointer.y < 415){
-                        this.musica.stop();
-                        this.scene.start('CenaPrincipal');
-                    }
-            });
+        this.input.on('pointerdown', (pointer) => {
+            if(pointer.x > 455 && pointer.x < 570
+                && pointer.y > 368  && pointer.y < 415){
+                    this.musica.stop();
+                    this.scene.start('CenaPrincipal');
+                }
+        });
         
             //64d2dd0b-37f3-423b-ab8b-133e5b9b6758
             //

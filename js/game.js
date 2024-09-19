@@ -39,7 +39,9 @@ export default class Game extends Phaser.Scene{
         
         this.musica = this.sound.add('soundtrack');
         this.musica.play();
-    
+        this.musica.loop = true;
+        this.musica.volume = 0.6;
+   
         this.numrDeTesouros = 0;
         this.raiosArray = [];
 
@@ -70,7 +72,6 @@ export default class Game extends Phaser.Scene{
         this.atualizaVisibilidadePoderes();
 
         this.scoreText = this.add.text(16, 395, 'Score: 0', { fontSize: '20px', fill: '#000' });
-           
     }
 
     pointerDown(){
@@ -126,8 +127,18 @@ export default class Game extends Phaser.Scene{
     }
 
     criaBads(){
+        
+        if(this.ordaManager.ordaAtual  == 4 /*this.ordaManager.ordas.length - 1*/){
+            this.cameras.main.fadeOut(800, 0, 0, 0);
+            this.musica.stop();
+            this.scene.start("CenaVitoria");
+        }
+        
+        //console.log(`Passou pq era orda ${this.ordaManager.ordaAtual - 1} e a orda limite era ${this.ordaManager.ordas.length - 1}`);
+        
         let quantos = this.ordaManager.qntNesseNivel;
         let cor = this.ordaManager.cor;
+            
         
         while(quantos > 0){
             let randX = this.aleatorioX(-20, 870);
@@ -142,6 +153,8 @@ export default class Game extends Phaser.Scene{
 
             quantos--;
         }
+
+        
         
     }
 
