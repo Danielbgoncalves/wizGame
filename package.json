@@ -1,0 +1,29 @@
+{
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.0",
+    "node": "^22.9.0"
+  },
+  "name": "wizard",
+  "description": "Um simples jogo mas competitivo. Seja um mago defendendo seu planeta de uma invasão alienígena !",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Danielbgoncalves/wizGame.git"
+  },
+  "keywords": [
+    "\"retro-game\"",
+    "\"online-game\""
+  ],
+  "author": "Daniel Borges Gonçalves, 44danbor@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Danielbgoncalves/wizGame/issues"
+  },
+  "homepage": "https://github.com/Danielbgoncalves/wizGame#readme"
+}
