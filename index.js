@@ -3,7 +3,7 @@ const cors = require('cors');
 const {MongoClient} = require('mongodb');
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 const uri = process.env.MONGODB_URI || 'mongodb://mongo:yvTehVZQAfLeKJItQVWkNyDWkjkhkdvS@junction.proxy.rlwy.net:26846';
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -19,7 +19,7 @@ async function connectToDatabase() {
 
 connectToDatabase();
 
-const allowedOrigins = ['http://127.0.0.1:5500', 'https://danielbgoncalves.github.io'];
+const allowedOrigins = ['http://127.0.0.1:5500', 'https://danielbgoncalves.github.io', 'https://danielbgoncalves.github.io/wizGame/'];
 
 const corsOption = {
     origin: function(origin, callback) {
