@@ -1,6 +1,8 @@
+const apiURL = 'https://web-production-83a7.up.railway.app/api/ranking'
+
 export function enviarPartida(dados){
 
-    fetch('http://localhost:3000/api/ranking',{  
+    fetch(apiURL,{  
         method: 'POST',
         headers:{
             'Content-Type': 'application/json'
@@ -19,7 +21,7 @@ export function enviarPartida(dados){
 }
 
 export function receberRanking(){
-    fetch('http://localhost:3000/api/ranking')
+    fetch(apiURL)
     .then(response => {
         return response.json();
     })
