@@ -9,12 +9,19 @@ export default class extends Phaser.Scene{
 
     preload(){
         this.load.image("fundo_vitoria", "Assets/vitoria.png");
+        this.load.audio('soundtrack2', 'Assets/soundtrack2.mp3');
 
     }
 
     create(){
         this.add.image(425, 225, 'fundo_vitoria');
-        this.cameras.main.fadeIn(800, 0, 0, 0);
+        this.cameras.main.fadeIn(900, 0, 0, 0);
+
+        this.musica = this.sound.add('soundtrack2');
+        this.musica.play();
+        this.musica.loop = true;
+        this.musica.volume = 0.6;
+
         //this.musica
 
         let cenaStart = this.scene.get("Start");
@@ -24,7 +31,7 @@ export default class extends Phaser.Scene{
         let cenaPrincipal = this.scene.get("CenaPrincipal");
         let pontuacao = cenaPrincipal.pontuacao.score;
 
-        this.mago = new Mago(280, 115, this, 'mago', 3, 0);
+        this.mago = new Mago(280, 105, this, 'mago', 3, 0);
         this.mago.sprite.setScale(1.5);
         this.mago.playAnims('mago-idle');
         

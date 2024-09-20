@@ -10,10 +10,15 @@ export default class Start extends Phaser.Scene {
     preload(){
         this.load.spritesheet('mago', 'Assets/mago.png', {frameWidth: 38, frameHeight: 49} );
         this.load.image('background', 'Assets/fundo.png');
+        this.load.audio('soundtrack1', 'Assets/soundtrack1.mp3');
     }
 
     create(){
         this.add.image(425, 275, 'background');
+
+        this.musica = this.sound.add('soundtrack1');
+        this.musica.play();
+        this.musica.loop = true;
 
         this.mago = new Mago(270, 195, this, 'mago', 3, 0);
         this.mago.sprite.setScale(1.1)

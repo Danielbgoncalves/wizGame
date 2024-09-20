@@ -1,13 +1,13 @@
 {
-  "name": "backend",
+  "name": "wiz_game",
   "version": "1.0.0",
   "description": "Servidor pro jogo: Wizard",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["mini-game", "retro-game", "node.js"],
+  "author": "Daniel Borges Gonçalves, 44danbor@gmail.com",
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",

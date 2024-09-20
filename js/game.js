@@ -33,14 +33,15 @@ export default class Game extends Phaser.Scene{
         this.ordaManager = new Orda(this); 
         this.pontuacao = {
             score: 0,
-            timeSinceLasKill: 0,
+            timeSinceLastKill: 0,
             bonus: 0
         };
+        this.tempoInicial = 0;
         
         this.musica = this.sound.add('soundtrack');
         this.musica.play();
         this.musica.loop = true;
-        this.musica.volume = 0.6;
+        this.musica.volume = 0.8;
    
         this.numrDeTesouros = 0;
         this.raiosArray = [];
@@ -71,6 +72,7 @@ export default class Game extends Phaser.Scene{
         this.desenhaPoderes();
         this.atualizaVisibilidadePoderes();
 
+        this.ordaText = this.add.text(16, 375,  'Orda:  1/12', { fontSize: '20px', fill: '#000' });
         this.scoreText = this.add.text(16, 395, 'Score: 0', { fontSize: '20px', fill: '#000' });
     }
 
@@ -128,7 +130,7 @@ export default class Game extends Phaser.Scene{
 
     criaBads(){
         
-        if(this.ordaManager.ordaAtual  ==  this.ordaManager.ordas.length - 1){
+        if(this.ordaManager.ordaAtual  ==  4 /*this.ordaManager.ordas.length - 1*/){
             this.cameras.main.fadeOut(800, 0, 0, 0);
             this.musica.stop();
             this.scene.start("CenaVitoria");
@@ -262,7 +264,7 @@ export default class Game extends Phaser.Scene{
 
     colisaoDoTesouro(quemColidiu, corpoColidido){
         if(quemColidiu === 'raio'){
-            this.addExtraScore(15);
+            this.addExtraScore(20);
         } else {
             this.addExtraScore(5);
         }
@@ -279,16 +281,19 @@ export default class Game extends Phaser.Scene{
     }
 
     updateScore(){
-        this.scoreText.setText('Score ' + this.pontuacao.score);
+        this.scoreText.setText(`Score: ${this.pontuacao.score}`);
+        this.ordaText.setText(`Orda: ${this.ordaManager.ordaAtual+1}/12`);
     }
 
     calculaPontuacao(){
-        let timeAtual = this.time.now;
-        let delayEntreAbates = timeAtual - this.pontuacao.timeSinceLasKill;
-        this.pontuacao.timeSinceLasKill = timeAtual;
+        //let timeAtual = this.time.now;
+        let timeAtual = this.tempoInicial != 0 ? this.time.now : this.tempoInicial; 
+        let delayEntreAbates = timeAtual - this.pontuacao.timeSinceLastKill;
+        this.pontuacao.timeSinceLastKill = timeAtual;
+        this.tempoInicial = timeAtual;
 
         this.pontuacao.score += 100;
-        this.pontuacao.score -= Math.floor(delayEntreAbates / 200);
+        this.pontuacao.score -= Math.floor(delayEntreAbates / 150);
         this.pontuacao.score += this.pontuacao.bonus;
 
         this.updateScore();

@@ -8,7 +8,7 @@ export default class Dead extends Phaser.Scene{
 
     preload(){
         this.load.image("fundo_morreu", "Assets/perdeu.png");
-        this.load.audio('deadSong', 'Assets/deadSong.mp3');
+        this.load.audio('deadSong', 'Assets/soundtrack3.mp3');
         this.load.spritesheet('mago', 'Assets/mago.png', {frameWidth: 38, frameHeight: 49} );
 
     }
@@ -18,7 +18,7 @@ export default class Dead extends Phaser.Scene{
         this.musica = this.sound.add('deadSong');
         this.musica.play();
         this.musica.loop = true;
-        this.musica.volume = 0.3;
+        this.musica.volume = 0.6;
 
         this.add.image(425, 225,"fundo_morreu");
         

@@ -5,15 +5,17 @@ export default class Dicas extends Phaser.Scene {
 
     preload(){
         this.load.image('fundoDicas', 'Assets/dicas.png');
-        this.load.audio('somDaHora', 'Assets/somDaHora.mp3');
+        //this.load.audio('somDaHora', 'Assets/somDaHora.mp3');
     }
 
     create(){
         this.add.image(425, 225, 'fundoDicas');
-        this.musica = this.sound.add('somDaHora');
-        this.musica.play();
-        this.musica.loop = true;
-        this.musica.volume = 0.2;
+        //this.musica = this.sound.add('somDaHora');
+        //this.musica.play();
+        //this.musica.loop = true;
+        //this.musica.volume = 0.2;
+        let cenaStart = this.scene.get("Start");
+        this.musica = cenaStart.musica;
 
         this.enter = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
 
