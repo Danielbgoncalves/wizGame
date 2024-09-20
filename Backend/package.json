@@ -4,7 +4,8 @@
   "description": "Servidor pro jogo: Wizard",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
   },
   "keywords": ["mini-game", "retro-game", "node.js"],
   "author": "Daniel Borges Gonçalves, 44danbor@gmail.com",
@@ -12,5 +13,8 @@
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.19.2"
+  },
+  "engines": {
+    "node": "20.10.0"
   }
 }
