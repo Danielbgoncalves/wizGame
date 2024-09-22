@@ -48,6 +48,10 @@ export default class Bad extends Phaser.Physics.Arcade.Sprite {
     levarDano(dano, instantaneo) {
         this.vida -= dano;
         this.playAnimis('tomaDano');
+        let key = 'animationcomplete-' + this.uniqueId + '-tomaDano';
+        this.once(key, () => {
+            this.playAnimis('anda');
+        });
 
         if (this.vida <= 0) {
             this.body.enable = false;

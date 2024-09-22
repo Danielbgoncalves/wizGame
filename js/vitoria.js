@@ -31,7 +31,7 @@ export default class extends Phaser.Scene{
         let cenaPrincipal = this.scene.get("CenaPrincipal");
         let pontuacao = cenaPrincipal.pontuacao.score;
 
-        this.mago = new Mago(280, 105, this, 'mago', 3, 0);
+        this.mago = new Mago(270, 125, this, 'mago', 3, 0);
         this.mago.sprite.setScale(1.5);
         this.mago.playAnims('mago-idle');
         
