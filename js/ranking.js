@@ -1,6 +1,6 @@
 const apiURL = 'https://web-production-83a7.up.railway.app/ranking'
 
-export function enviarPartida(dados){
+export async function enviarPartida(dados){
 
     fetch(apiURL,{  
         method: 'POST',
@@ -13,6 +13,7 @@ export function enviarPartida(dados){
     .then(response => response.json())
     .then(data => {
         console.log(`Resposta do servidor: ${data}`);
+        //return new Promise;
     })
     .catch(error => {
         console.error(`Erro ao enviar os dados: ${error}`);
@@ -20,7 +21,7 @@ export function enviarPartida(dados){
     });
 }
 
-export function receberRanking(){
+export async function receberRanking(){
     fetch(apiURL)
     .then(response => {
         return response.json();

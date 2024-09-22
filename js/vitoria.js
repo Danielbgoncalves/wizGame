@@ -35,9 +35,10 @@ export default class extends Phaser.Scene{
         this.mago.sprite.setScale(1.5);
         this.mago.playAnims('mago-idle');
         
-        enviarPartida({nome, pontuacao, id})
+        this.sendUpdates({nome, pontuacao, id})
+        enviarPartida()
         this.time.delayedCall(800, () => {
-            receberRanking();
+            
         })
 
         this.input.on('pointerdown', (pointer) => {
@@ -48,6 +49,11 @@ export default class extends Phaser.Scene{
                 }
         });
 
+    }
+
+    async sendUpdates(dadosJogador){
+        await enviarPartida(dadosJogador);
+        receberRanking();
     }
 
     update(){}

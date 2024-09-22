@@ -41,7 +41,7 @@ export default class Game extends Phaser.Scene{
         this.musica = this.sound.add('soundtrack');
         this.musica.play();
         this.musica.loop = true;
-        this.musica.volume = 0.8;
+        this.musica.volume = 0.9;
    
         this.numrDeTesouros = 0;
         this.raiosArray = [];
