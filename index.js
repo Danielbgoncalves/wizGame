@@ -41,7 +41,7 @@ app.use(express.json());
 
 app.post('/ranking', async (req, res) => {
   try {
-    let { nome, pontuacao, id } = req.body;
+    let { nome, pontuacao, id, horario } = req.body;
 
     if (!nome || typeof pontuacao !== 'number') {
       return res.status(400).json({ message: 'nome ou pontuacao invalidos' });
@@ -56,7 +56,7 @@ app.post('/ranking', async (req, res) => {
         await collection.updateOne({ id }, { $set: { pontuacao } });
       }
     } else {
-      await collection.insertOne({ nome, pontuacao, id });
+      await collection.insertOne({ nome, pontuacao, id, horario});
     }
 
     res.status(201).json({ message: 'Dados enviados com sucesso' });

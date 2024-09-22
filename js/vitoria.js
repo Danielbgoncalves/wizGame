@@ -30,12 +30,18 @@ export default class extends Phaser.Scene{
 
         let cenaPrincipal = this.scene.get("CenaPrincipal");
         let pontuacao = cenaPrincipal.pontuacao.score;
+        let data = new Date();
+        let horario = {
+            hora: data.getHours(), 
+            minuto: data.getMinutes(),
+            segundos: data.getSeconds()
+        }
 
         this.mago = new Mago(270, 125, this, 'mago', 3, 0);
         this.mago.sprite.setScale(1.5);
         this.mago.playAnims('mago-idle');
         
-        this.sendUpdates({nome, pontuacao, id});
+        this.sendUpdates({nome, pontuacao, id, horario});
 
         this.input.on('pointerdown', (pointer) => {
             if(pointer.x > 215 && pointer.x < 325

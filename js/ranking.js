@@ -10,11 +10,8 @@ function hora(){
     console.log(`Hora atual: ${horas}:${minutos}:${segundos}:${milissegundos}`);
 }
 
-export async function enviarPartida(dados){
-    
-    hora();
-    
-    
+export async function enviarPartida(dados){ 
+    //hora();
 
     fetch(apiURL,{  
         method: 'POST',
@@ -34,7 +31,7 @@ export async function enviarPartida(dados){
         alert('Sua pontuação não foi salva por erro ao comunicar com o servidor :/');
     });
 
-    hora();
+    //hora();
 }
 
 export async function receberRanking(){
@@ -49,6 +46,7 @@ export async function receberRanking(){
             const nome = entrada.nome;
             const pontuacao = entrada.pontuacao;
             const id = entrada.id;
+            const horario = entrada.horario;
             AddPlayerNoRanking(nome, pontuacao, id);
         })
     })
