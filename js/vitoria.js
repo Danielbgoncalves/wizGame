@@ -47,9 +47,11 @@ export default class extends Phaser.Scene{
 
     }
 
-    async sendUpdates(dadosJogador){
-        await enviarPartida(dadosJogador);
-        await receberRanking();
+    sendUpdates(dadosJogador){
+        enviarPartida(dadosJogador);
+        setTimeout(() => {
+            receberRanking();
+        }, 1000);
     }
 
     update(){}

@@ -1,6 +1,20 @@
 const apiURL = 'https://web-production-83a7.up.railway.app/ranking'
 
+function hora(){
+    const agora = new Date();
+    const horas = agora.getHours();
+    const minutos = agora.getMinutes();
+    const segundos = agora.getSeconds();
+    const milissegundos = agora.getMilliseconds();
+
+    console.log(`Hora atual: ${horas}:${minutos}:${segundos}:${milissegundos}`);
+}
+
 export async function enviarPartida(dados){
+    
+    hora();
+    
+    
 
     fetch(apiURL,{  
         method: 'POST',
@@ -19,6 +33,8 @@ export async function enviarPartida(dados){
         console.error(`Erro ao enviar os dados: ${error}`);
         alert('Sua pontuação não foi salva por erro ao comunicar com o servidor :/');
     });
+
+    hora();
 }
 
 export async function receberRanking(){
