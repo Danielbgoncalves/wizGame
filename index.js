@@ -3,9 +3,9 @@ const cors = require('cors');
 const { MongoClient } = require('mongodb');
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3000; 
 
-const uri = process.env.MONGODB_URI || 'mongodb://mongo:yvTehVZQAfLeKJItQVWkNyDWkjkhkdvS@junction.proxy.rlwy.net:26846';
+const uri = process.env.MONGODB_URI /*|| 'mongodb://mongo:yvTehVZQAfLeKJItQVWkNyDWkjkhkdvS@junction.proxy.rlwy.net:26846'*/;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
 // Conectando ao MongoDB uma vez ao iniciar o servidor
@@ -13,7 +13,7 @@ let db;
 async function connectToDatabase() {
   try {
     await client.connect();
-    console.log('Conectado ao MongoDB!');
+    console.log('Conectado ao MongoDB! e seu uri é: ', uri);
     db = client.db('ranking'); // Guarde a referência ao banco de dados
   } catch (error) {
     console.error('Erro ao conectar no MongoDB', error);
