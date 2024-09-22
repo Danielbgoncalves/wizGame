@@ -39,7 +39,7 @@ const corsOption = {
 app.use(cors(corsOption));
 app.use(express.json());
 
-app.post('/api/ranking', async (req, res) => {
+app.post('/ranking', async (req, res) => {
   try {
     let { nome, pontuacao, id } = req.body;
 
@@ -66,7 +66,7 @@ app.post('/api/ranking', async (req, res) => {
   }
 });
 
-app.get('/api/ranking', async (req, res) => {
+app.get('/ranking', async (req, res) => {
   try {
     const collection = db.collection('players-ranking');
     const rankingOrdenado = await collection.find().sort({ pontuacao: -1 }).toArray();
