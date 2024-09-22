@@ -41,10 +41,7 @@ export default class Dead extends Phaser.Scene{
         this.mago.sprite.setScale(1.5);
         this.mago.playAnims('mago-idle');
         
-        enviarPartida({nome, pontuacao, id})
-        this.time.delayedCall(800, () => {
-            receberRanking();
-        })  
+        this.sendUpdates({nome, pontuacao, id});
         
         this.input.on('pointerdown', (pointer) => {
             if(pointer.x > 455 && pointer.x < 570
@@ -54,8 +51,13 @@ export default class Dead extends Phaser.Scene{
                 }
         });
         
-            //64d2dd0b-37f3-423b-ab8b-133e5b9b6758
+            //64d2dd0-37f3-423b-ab8b-133e5b9b6758
             //
+    }
+
+    async sendUpdates(dadosJogador){
+        await enviarPartida(dadosJogador);
+        await receberRanking();
     }
 
     
