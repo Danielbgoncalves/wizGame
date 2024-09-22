@@ -42,7 +42,7 @@ export default class Dead extends Phaser.Scene{
         this.mago.playAnims('mago-idle');
         
         enviarPartida({nome, pontuacao, id})
-        this.time.delayedCall(400, () => {
+        this.time.delayedCall(800, () => {
             receberRanking();
         })  
         

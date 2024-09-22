@@ -36,14 +36,14 @@ export default class extends Phaser.Scene{
         this.mago.playAnims('mago-idle');
         
         enviarPartida({nome, pontuacao, id})
-        this.time.delayedCall(400, () => {
+        this.time.delayedCall(800, () => {
             receberRanking();
         })
 
         this.input.on('pointerdown', (pointer) => {
             if(pointer.x > 215 && pointer.x < 325
                 && pointer.y > 360  && pointer.y < 410){
-                    //this.musica.stop();
+                    this.musica.stop();
                     this.scene.start('CenaPrincipal');
                 }
         });
