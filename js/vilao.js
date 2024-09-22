@@ -63,13 +63,8 @@ export default class Bad extends Phaser.Physics.Arcade.Sprite {
             }
 
             this.cena.ordaManager.atualiza();
-            console.log('MORREU UM');
             this.cena.calculaPontuacao(this.bonus);
 
-            /*if(this.cena.ordaManager.nasceNovaOrda()){
-                this.cena.criaBads();
-                console.log('classe vilao mandou criar mais viloes');
-            }*/
         }
     }
 

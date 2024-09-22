@@ -1,4 +1,4 @@
-const apiURL = 'https://web-production-83a7.up.railway.app/api/ranking'
+const apiURL = 'https://web-production-83a7.up.railway.app/ranking'
 
 export function enviarPartida(dados){
 

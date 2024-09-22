@@ -72,7 +72,6 @@ export default class Mago {
 
         if(this.vida < 1){
             this.playAnims('mago-morre');
-            console.log("morreu caceteeee");
             return true;
         }
         return false;

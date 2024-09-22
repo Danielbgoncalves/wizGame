@@ -5,7 +5,7 @@ const { MongoClient } = require('mongodb');
 const app = express();
 const port = process.env.PORT || 3000; 
 
-const uri = process.env.MONGODB_URI /*|| 'mongodb://mongo:yvTehVZQAfLeKJItQVWkNyDWkjkhkdvS@junction.proxy.rlwy.net:26846'*/;
+const uri = process.env.MONGODB_URI ;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
 // Conectando ao MongoDB uma vez ao iniciar o servidor

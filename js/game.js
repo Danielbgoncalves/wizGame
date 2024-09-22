@@ -130,14 +130,12 @@ export default class Game extends Phaser.Scene{
 
     criaBads(){
         
-        if(this.ordaManager.ordaAtual  ==  4 /*this.ordaManager.ordas.length - 1*/){
+        if(this.ordaManager.ordaAtual  ==  this.ordaManager.ordas.length - 1){
             this.cameras.main.fadeOut(800, 0, 0, 0);
             this.musica.stop();
             this.scene.start("CenaVitoria");
         }
-        
-        //console.log(`Passou pq era orda ${this.ordaManager.ordaAtual - 1} e a orda limite era ${this.ordaManager.ordas.length - 1}`);
-        
+                
         let quantos = this.ordaManager.qntNesseNivel;
         let cor = this.ordaManager.cor;
             

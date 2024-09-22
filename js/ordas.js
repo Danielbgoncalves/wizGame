@@ -29,7 +29,6 @@ export default class ordasManager {
         if(this.ordas[this.ordaAtual].qtdViloes === 0 && this.ordaAtual < this.ordas.length ){
             this.ordaAtual++;
             this.cena.criaBads();
-            console.log(`pediu pra criar bads e this.ordaAtual = ${this.ordaAtual}`);
         }
     }
 
